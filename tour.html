@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cactus-IX • Bootstrap Futuristic Landing</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts (used only in CACTUS skin visually; still safe to load always) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+  /* =========================================
+     Base tokens (Bootstrap-first)
+  ==========================================*/
+  :root{
+    --neo-primary:#00ffc6;
+    --neo-secondary:#45a3ff;
+    --neo-accent:#78ff54;
+    --neo-glow: 0 0 18px rgba(0,255,198,.18), 0 0 40px rgba(69,163,255,.14);
+  }
+
+  /* Default body uses Bootstrap fonts/colors (vanilla) */
+  body{
+    font-family: var(--bs-body-font-family);
+    color: var(--bs-body-color);
+    background: var(--bs-body-bg);
+    transition: background-color .3s ease, color .3s ease, background-image .3s ease;
+  }
+
+  /* =========================================
+     CACTUS Skin (neon look) — scoped by ancestor
+     - html carries data-bs-theme (light/dark)
+     - body carries data-cx-skin="cactus" | "bootstrap"
+  ==========================================*/
+  html[data-bs-theme="light"] body[data-cx-skin="cactus"]{
+    --page-bg:
+      radial-gradient(1200px 600px at 85% -10%, rgba(69,163,255,.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(0,255,198,.05), transparent 60%),
+      var(--bs-body-bg);
+  }
+  html[data-bs-theme="dark"] body[data-cx-skin="cactus"]{
+    --page-bg:
+      radial-gradient(1200px 600px at 85% -10%, rgba(69,163,255,.14), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(0,255,198,.10), transparent 60%),
+      var(--bs-body-bg);
+    --neo-glow: 0 0 18px rgba(0,255,198,.25), 0 0 40px rgba(69,163,255,.18);
+  }
+  body[data-cx-skin="cactus"]{
+    background: var(--page-bg);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  body[data-cx-skin="cactus"] .brand{
+    font-family: Orbitron, Inter, sans-serif;
+    letter-spacing:.14em;
+    display:inline-flex; gap:.5rem; align-items:center;
+    animation: brandPulse 5s ease-in-out infinite;
+  }
+  body[data-cx-skin="cactus"] .brand .dot{
+    width:.55rem; height:.55rem; border-radius:50%;
+    background: var(--neo-primary);
+    box-shadow:0 0 10px rgba(0,255,198,.6);
+  }
+  @keyframes brandPulse{
+    0%,100%{filter: drop-shadow(0 0 0 rgba(0,255,198,0));}
+    50%{filter: drop-shadow(0 0 10px rgba(0,255,198,.4));}
+  }
+
+  body[data-cx-skin="cactus"] .neo-gradient{
+    background:linear-gradient(90deg,var(--neo-primary),var(--neo-secondary));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  body[data-cx-skin="cactus"] .neo-panel{
+    background: var(--bs-body-bg);
+    border:1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    box-shadow: var(--neo-glow);
+    transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
+    transform-style: preserve-3d;
+  }
+  body[data-cx-skin="cactus"] .tilt-wrap{ perspective: 1000px; }
+  body[data-cx-skin="cactus"] .tilt-wrap .neo-panel:hover{
+    transform: translateY(-6px) rotateX(1deg) rotateY(.5deg);
+    box-shadow: 0 18px 60px rgba(0,0,0,.18), var(--neo-glow);
+    border-color: color-mix(in srgb, var(--bs-border-color) 60%, var(--neo-primary));
+  }
+
+  body[data-cx-skin="cactus"] .btn-neo{
+    border:1px solid color-mix(in srgb, var(--bs-border-color) 40%, var(--neo-primary));
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bs-body-bg) 85%, var(--neo-primary)),
+      color-mix(in srgb, var(--bs-body-bg) 85%, var(--neo-secondary))
+    );
+    color: var(--bs-body-color);
+    transition: transform .2s ease, box-shadow .25s ease, border-color .2s ease;
+  }
+  body[data-cx-skin="cactus"] .btn-neo:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px color-mix(in srgb, transparent 60%, var(--neo-primary));
+    border-color: color-mix(in srgb, var(--bs-border-color) 15%, var(--neo-primary));
+  }
+  body[data-cx-skin="cactus"] .btn-ghost{
+    border:1px solid var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+    color: var(--bs-body-color);
+  }
+
+  /* =========================================
+     Pure Bootstrap Skin (vanilla look)
+  ==========================================*/
+  body[data-cx-skin="bootstrap"] .brand{ letter-spacing: normal; animation: none; }
+  body[data-cx-skin="bootstrap"] .brand .dot{ display:none; }
+  body[data-cx-skin="bootstrap"] .hero-caption{
+    background: none; border: none; backdrop-filter: none;
+  }
+  body[data-cx-skin="bootstrap"] .shadow-glow{ box-shadow: var(--bs-box-shadow) !important; }
+  body[data-cx-skin="bootstrap"] .border-neo{ border-color: var(--bs-border-color) !important; box-shadow: none !important; }
+  /* Map .btn-neo to Bootstrap primary in pure Bootstrap skins */
+  body[data-cx-skin="bootstrap"] .btn-neo{
+    background-color: var(--bs-primary); border-color: var(--bs-primary); color: #fff;
+  }
+  body[data-cx-skin="bootstrap"] .btn-neo:hover{
+    background-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+    border-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+    color: #fff;
+  }
+
+  /* =========================================
+     Navbar active state — accessible in both themes
+  ==========================================*/
+  .navbar .nav-link.active{
+    color: var(--bs-primary-text-emphasis) !important;
+    background-color: var(--bs-primary-bg-subtle);
+    border-radius: .375rem;
+    font-weight: 600;
+    text-shadow: none;
+    padding-inline: .5rem;
+  }
+  .navbar .nav-link:hover,
+  .navbar .nav-link:focus{
+    background-color: var(--bs-secondary-bg);
+    border-radius: .375rem;
+  }
+
+  /* Carousel & tabs visuals */
+  .hero-carousel .carousel-item{ max-height: 70vh; }
+  .hero-caption{
+    background: color-mix(in srgb, var(--bs-body-bg) 60%, transparent);
+    border:1px solid var(--bs-border-color);
+    backdrop-filter: blur(6px);
+    border-radius:.75rem;
+    animation: captionFade .8s ease both;
+  }
+  @keyframes captionFade{
+    from{ opacity:0; transform: translateY(8px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .tab-content img{
+    transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
+    transform-style: preserve-3d;
+  }
+  .tab-content img:hover{
+    transform: translateZ(8px) translateY(-4px) rotateX(.8deg);
+    box-shadow: 0 12px 36px rgba(0,0,0,.18);
+    filter: saturate(1.05);
+  }
+
+  /* Forms use Bootstrap tokens */
+  .form-control, .form-select{
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+
+  /* Motion preferences */
+  html{ transition: color-scheme .25s ease; }
+  @media (prefers-reduced-motion: reduce){
+    * { transition:none!important; animation:none!important; scroll-behavior:auto; }
+  }
+
+  /* Theme select sizing */
+  #themeSelect{ min-width: 12rem; }
+
+  /* Spacing helper for sections */
+  .section-pad{ padding: 4rem 0; }
+  </style>
+</head>
+
+<!-- Enable ScrollSpy via data attributes only -->
+<body id="top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="56" tabindex="0">
+
+  <!-- NAVBAR -->
+  <nav id="mainNav" class="navbar navbar-expand-md bg-body-tertiary fixed-top border-bottom">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-semibold" href="#top">Tennis</a>
+
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navContent"
+              aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navContent" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="band.html"><i class="bi bi-house-door me-1" aria-hidden="true"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="tour.html"><i class="bi bi-stars me-1" aria-hidden="true"></i>tour</a></li>
+          <li class="nav-item"><a class="nav-link" href="discography.html"><i class="bi bi-patch-question me-1" aria-hidden="true"></i>discography</a></li>
+          <li class="nav-item"><a class="nav-link" href="videos.html"><i class="bi bi-grid-3x3-gap me-1" aria-hidden="true"></i>music videos</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-envelope-open me-1" aria-hidden="true"></i>about</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="check2" viewBox="0 0 16 16">
+      <path
+        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+      ></path>
+    </symbol>
+
+    <symbol id="circle-half" viewBox="0 0 16 16">
+      <path
+        d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+      ></path>
+    </symbol>
+
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+      <path
+        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 
+        4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 
+        0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 
+        16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 
+        5.124.06A.752.752 0 0 1 6 .278z"
+      ></path>
+      <path
+        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 
+        1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 
+        1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 
+        1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 
+        6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 
+        1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 
+        0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 
+        0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 
+        0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 
+        0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+      ></path>
+    </symbol>
+
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 
+        8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 
+        1-1 0v-2A.5.5 0 0 1 8 
+        0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 
+        0 0 1-1 0v-2A.5.5 0 0 1 8 
+        13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 
+        0 0 1 0-1h2a.5.5 0 0 1 
+        .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 
+        0 0 1 0-1h2A.5.5 0 0 1 3 
+        8zm10.657-5.657a.5.5 0 0 1 0 
+        .707l-1.414 1.415a.5.5 0 1 
+        1-.707-.708l1.414-1.414a.5.5 0 0 
+        1 .707 0zm-9.193 9.193a.5.5 0 0 
+        1 0 .707L3.05 13.657a.5.5 0 0 
+        1-.707-.707l1.414-1.414a.5.5 0 0 
+        1 .707 0zm9.193 2.121a.5.5 0 0 
+        1-.707 0l-1.414-1.414a.5.5 0 0 
+        1 .707-.707l1.414 1.414a.5.5 0 0 
+        1 0 .707zM4.464 4.465a.5.5 0 0 
+        1-.707 0L2.343 3.05a.5.5 0 1 
+        1 .707-.707l1.414 1.414a.5.5 0 0 
+        1 0 .708z"
+      ></path>
+    </symbol>
+  </svg>
+
+  
+
+  <main>
+    <h1 class="visually-hidden">Heroes examples</h1>
+
+    <!-- Centered Hero -->
+    <div class="px-4 py-5 my-5 text-center">
+      <img
+        class="d-block mx-auto mb-4img-fluid"
+        src="images/tour.jpeg"
+        alt=""
+        width="700"
+        height="900"
+      />
+    </div>
+    
+    <a class="icon-link" href="https://www.ticketmaster.com/tennis-tickets/artist/1505380">
+  <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+  </svg>
+  Get Tickets 
+</a>
+
+    
+
+   
+    <!-- Additional content truncated for brevity -->
+  </main>
+
+
+  <script>
+    src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    class="astro-vvvwv3sm"
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer>
+          <div class="mt-4 small text-body-secondary">
+            © 2025 CACTUS-IX • Dark/Light Theme • Grid + Flex • Built with Bootstrap 5
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ScrollSpy with correct offset for fixed navbar
+    const nav = document.querySelector('#mainNav');
+    const bodyEl = document.body;
+    bodyEl.setAttribute('data-bs-offset', nav ? nav.offsetHeight : 56);
+    new bootstrap.ScrollSpy(bodyEl, { target: '#mainNav' });
+
+    // THEME & SKIN SELECTS (Bootstrap uses [data-bs-theme] on <html>; we add [data-cx-skin] on <body>)
+    const htmlEl = document.documentElement;
+    const sel = document.getElementById('themeSelect');
+    const selMobile = document.getElementById('themeSelectMobile');
+
+    function applyChoice(choice){
+      // choice: 'bootstrap-light' | 'bootstrap-dark' | 'cactus-light' | 'cactus-dark'
+      const [skin, mode] = choice.split('-');
+      const modeMapped = (mode === 'dark') ? 'dark' : 'light';
+      const skinMapped = (skin === 'bootstrap') ? 'bootstrap' : 'cactus';
+      htmlEl.setAttribute('data-bs-theme', modeMapped);
+      bodyEl.setAttribute('data-cx-skin', skinMapped);
+      localStorage.setItem('cx-theme-choice', choice);
+      if (sel) sel.value = choice;
+      if (selMobile) selMobile.value = choice;
+    }
+    // Expose for optional hooks (e.g., disabling fonts in pure Bootstrap)
+    window.applyChoice = applyChoice;
+
+    // Initialize from storage or system preference (default cactus honoring system)
+    (function init(){
+      const stored = localStorage.getItem('cx-theme-choice');
+      if(stored){ applyChoice(stored); return; }
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyChoice(`cactus-${prefersDark ? 'dark' : 'light'}`);
+    })();
+
+    // Wire change events
+    [sel, selMobile].forEach(el => {
+      if(!el) return;
+      el.addEventListener('change', (e)=> applyChoice(e.target.value));
+    });
+  </script>
+</body>
+</html>
